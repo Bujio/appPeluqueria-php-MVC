@@ -11,8 +11,8 @@ class LoginController{
   public static function logout(){
     echo "desde logout";
   }
-  public static function olvide(){
-    echo "olvide pass";
+  public static function olvide(Router $router){
+   $router->render('auth/olvide');
   }
   public static function recuperar(){
     echo "recuperar pass";
