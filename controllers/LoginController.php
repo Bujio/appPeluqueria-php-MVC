@@ -6,7 +6,7 @@ use MVC\Router;
 
 class LoginController{
   public static function login (Router $router){
-    echo "desde login";
+    $router->render('auth/login');
   }
   public static function logout(){
     echo "desde logout";
