@@ -10,7 +10,7 @@
     <label for="password">Password</label>
     <input type="password" id="password" placeholder="tu password" name="password">
   </div>
-  <input type="submit" class="boton" value="Iniciar sesión">
+  <input type="submit" class="boton uppercase" value="Iniciar sesión">
 </form>
 
 <div class="acciones">
