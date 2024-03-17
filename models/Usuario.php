@@ -56,6 +56,17 @@ class Usuario extends ActiveRecord
     return self::$alertas;
   }
 
+  public function validarLogin()
+  {
+    if (!$this->email) {
+      self::$alertas['error'][] = 'El email es obligatorio';
+    }
+    if (!$this->password) {
+      self::$alertas['error'][] = 'El password es obligatorio';
+    }
+    return self::$alertas;
+  }
+
   public function existeUsuario()
   {
     $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "'LIMIT 1";
@@ -74,5 +85,10 @@ class Usuario extends ActiveRecord
   public function crearToken()
   {
     $this->token = uniqid();
+  }
+  public function comprobarPasswordAndVerificarlo($password)
+  {
+    $resultado = password_verify($password, $this->password);
+
   }
 }
