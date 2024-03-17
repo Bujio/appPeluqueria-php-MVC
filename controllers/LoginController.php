@@ -20,7 +20,22 @@ class LoginController
         $usuario = Usuario::where('email', $auth->email);
         if ($usuario) {
           //Verificar el password
-          $usuario->comprobarPasswordAndVerificarlo($auth->password);
+          if ($usuario->comprobarPasswordAndVerificarlo($auth->password)) {
+            //Autentificar Usuario
+            session_start();
+            $_SESSION['id'] = $usuario->id;
+            $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
+            $_SESSION['email'] = $usuario->email;
+            $_SESSION['login'] = true;
+
+            //Redireccionamiento admin o no
+            if ($usuario->admin = '1') {
+              $_SESSION['admind'] = $usuario->admin ?? null;
+              header('Location: /admin');
+            } else {
+              header('Location: /cita');
+            }
+          }
         } else {
           Usuario::setAlerta('error', 'Usuario o password incorrectos');
         }
